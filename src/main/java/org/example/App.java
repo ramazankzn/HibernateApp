@@ -21,18 +21,15 @@ public class App
 
             session.beginTransaction();
 
-            Person person1 = new Person("Ram", 30);
-            Person person2 = new Person("Sergey", 30);
-            Person person3 = new Person("Rustem", 28);
 
-            session.save(person1);
-            session.save(person2);
-            session.save(person3);
+            Person person = new Person("Some name", 23);
+            session.save(person);
 
-            Person person = session.get(Person.class, 1);
-            System.out.println("Имя: " + person.getName() + ", возвраст: " + person.getAge());
+            System.out.println("Имя: " + person.getName() + ", возраст: " + person.getAge());
 
             session.getTransaction().commit();
+
+            System.out.println(person.getId());
         } finally {
             sessionFactory.close();
         }
