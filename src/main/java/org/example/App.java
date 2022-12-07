@@ -5,14 +5,11 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
-/**
- * Hello world!
- *
- */
-public class App 
-{
-    public static void main( String[] args )
-    {
+import java.util.List;
+
+
+public class App {
+    public static void main(String[] args) {
         Configuration configuration = new Configuration().addAnnotatedClass(Person.class);
 
         SessionFactory sessionFactory = configuration.buildSessionFactory();
@@ -21,15 +18,18 @@ public class App
 
             session.beginTransaction();
 
+            session.createQuery("delete from Person where age < 30").executeUpdate();
 
-            Person person = new Person("Some name", 23);
-            session.save(person);
+            List<Person> people = session.createQuery("from Person").getResultList();
 
-            System.out.println("Имя: " + person.getName() + ", возраст: " + person.getAge());
+
+            for (Person person:people
+                 ) {
+                System.out.println(person);
+            }
 
             session.getTransaction().commit();
 
-            System.out.println(person.getId());
         } finally {
             sessionFactory.close();
         }

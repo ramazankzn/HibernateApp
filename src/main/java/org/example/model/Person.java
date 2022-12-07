@@ -17,6 +17,15 @@ public class Person {
     @Column (name = "age")
     private int age;
 
+    @Override
+    public String toString() {
+        return "Этого человека " +
+                "с id=" + id +
+                ", зовут '" + name +
+                ", его возраст " + age +
+                " лет.";
+    }
+
     public Person(String name, int age) {
         this.name = name;
         this.age = age;
