@@ -2,6 +2,8 @@ package org.example.model;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "Person")
 public class Person {
@@ -11,20 +13,11 @@ public class Person {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column (name = "name")
+    @Column(name = "name")
     private String name;
 
-    @Column (name = "age")
+    @Column(name = "age")
     private int age;
-
-    @Override
-    public String toString() {
-        return "Этого человека " +
-                "с id=" + id +
-                ", зовут '" + name +
-                ", его возраст " + age +
-                " лет.";
-    }
 
     public Person(String name, int age) {
         this.name = name;
@@ -32,7 +25,17 @@ public class Person {
     }
 
     public Person() {
+    }
 
+    @OneToMany(mappedBy = "owner")
+    private List<Item> items;
+
+    public List<Item> getItems() {
+        return items;
+    }
+
+    public void setItems(List<Item> items) {
+        this.items = items;
     }
 
     public int getId() {
@@ -57,5 +60,14 @@ public class Person {
 
     public void setAge(int age) {
         this.age = age;
+    }
+
+    @Override
+    public String toString() {
+        return "Человек " +
+                "с id=" + id +
+                ", зовут " + name +
+                ", его возраст " + age +
+                " лет.";
     }
 }
