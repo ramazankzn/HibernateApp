@@ -27,7 +27,7 @@ public class Person {
     public Person() {
     }
 
-    @OneToMany(mappedBy = "owner")
+    @OneToMany(mappedBy = "owner", cascade = CascadeType.PERSIST)
     private List<Item> items;
 
     public List<Item> getItems() {
