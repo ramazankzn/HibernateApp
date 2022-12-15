@@ -22,13 +22,16 @@ public class App {
 
             session.beginTransaction();
 
-            Person person = new Person("Ele", 35);
+            Person person = new Person("Kam", 35);
 
-            Item item = new Item("Test cascading", person);
+            Item item = new Item("Refactoring item 1");
 
-            person.setItems(new ArrayList<>(Collections.singletonList(item)));
+            person.addItem(item);
+            person.addItem(new Item("Refactoring item 2"));
+            person.addItem(new Item("Refactoring item 3"));
 
-            session.persist(person);
+
+            session.save(person);
 
             session.getTransaction().commit();
 
