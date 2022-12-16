@@ -26,11 +26,17 @@ public class App {
 
             session.beginTransaction();
 
-            Person person = new Person("Oleg", 35);
-            person.setPassport(new Passport(1234));
+            Person person = session.get(Person.class, 11);
+            System.out.println(person.getPassport().getPassportNumber());
 
+            Passport passport = session.get(Passport.class, 11);
+            System.out.println(passport.getPerson().getName());
 
-            session.save(person);
+            Person person1 = session.get(Person.class, 1);
+            person1.getPassport().setPassportNumber(566);
+            System.out.println(person1.getPassport().getPassportNumber());
+
+            session.remove(person);
 
             session.getTransaction().commit();
 
