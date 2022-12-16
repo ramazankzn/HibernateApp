@@ -6,8 +6,12 @@ import java.io.Serializable;
 
 @Entity
 @Table (name = "Passport")
-public class Passport implements Serializable {
+public class Passport {
     @Id
+    @Column(name = "Id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+
     @OneToOne
     @JoinColumn (name = "person_id", referencedColumnName = "id")
     private Person person;
@@ -43,5 +47,13 @@ public class Passport implements Serializable {
 
     public void setPassportNumber(int passportNumber) {
         this.passportNumber = passportNumber;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }
